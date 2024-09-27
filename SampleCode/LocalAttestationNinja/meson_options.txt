@@ -1,0 +1,6 @@
+option('SGX_MODE', type : 'combo', choices : ['HW', 'SIM'], value : 'HW', description : 'SGX mode')
+option('SGX_ARCH', type : 'combo', choices : ['x64', 'x86'], value : 'x64', description : 'SGX architecture')
+option('SGX_DEBUG', type : 'boolean', value : true, description : 'Enable SGX debug')
+option('SGX_PRERELEASE', type : 'boolean', value : false, description : 'Enable SGX pre-release mode')
+option('SGX_SDK', type : 'string', value : '/home/trusslab/sgxsdk', description : 'Path to Intel SGX SDK')
+option('LAv2', type : 'boolean', value : false, description : 'Enable LAv2 for Enclave Initiator')
