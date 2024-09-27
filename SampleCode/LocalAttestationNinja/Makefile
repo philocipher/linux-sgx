@@ -65,7 +65,7 @@ all:
 	done
 ifeq ($(Build_Mode), HW_DEBUG)
 	@echo "The project has been built in hardware debug mode."
-else ifeq ($(Build_Mode), HW_RELEAESE)
+else ifeq ($(Build_Mode), HW_RELEASE)
 	@echo "The project has been built in hardware release mode."
 else ifeq ($(Build_Mode), HW_PRERELEAESE)
 	@echo "The project has been built in hardware pre-release mode."

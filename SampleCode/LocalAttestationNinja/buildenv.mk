@@ -70,7 +70,7 @@ CC ?= gcc
 CXX ?= g++
 
 # turn on cet
-CC_GREAT_EQUAL_8 := $(shell expr "`$(CC) -dumpversion`" \>= "8")
+CC_GREAT_EQUAL_8 := $(shell echo "`$(CC) -dumpversion` 8" | awk '{if ($$1 >= $$2) print 1; else print 0}')
 ifeq ($(CC_GREAT_EQUAL_8), 1)
     COMMON_FLAGS += -fcf-protection
 endif
@@ -85,7 +85,7 @@ SGX_DEBUG ?= 1
 #-------------------------------------------------------------------
 # Define common compile flags used for GCC and G++ 
 #-------------------------------------------------------------------
-COMMON_FLAGS = -ffunction-sections -fdata-sections
+COMMON_FLAGS += -ffunction-sections -fdata-sections
 
 COMMON_FLAGS += -Wall -Wextra -Wchar-subscripts -Wno-coverage-mismatch -Winit-self \
 		-Wpointer-arith -Wreturn-type -Waddress -Wsequence-point -Wformat-security \

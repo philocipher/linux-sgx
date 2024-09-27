@@ -85,7 +85,7 @@ SGX_COMMON_CXXFLAGS := $(SGX_COMMON_FLAGS) -Wnon-virtual-dtor -std=c++11
 Enclave_Include_Paths := -I$(SGX_SDK)/include -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/libcxx -I../Include
 
 Enclave_C_Flags := $(Enclave_Include_Paths) -nostdinc -fvisibility=hidden -fpie -ffunction-sections -fdata-sections
-CC_BELOW_4_9 := $(shell expr "`$(CC) -dumpversion`" \< "4.9")
+CC_BELOW_4_9 := $(shell echo "`$(CC) -dumpversion` 4.9" | awk '{if ($$1 < $$2) print 1; else print 0}')
 ifeq ($(CC_BELOW_4_9), 1)
     Enclave_C_Flags += -fstack-protector
 else
@@ -109,7 +109,7 @@ all:
 	@make target
 
 clean:
-	@rm -f  $(ENCLAVE_NAME) $(SIGNED_ENCLAVE_NAME) *.o *_t.c *_t.h *_u.c *_u.h
+	@rm -f  $(ENCLAVE_NAME) $(SIGNED_ENCLAVE_NAME) *.o *_t.c *_t.h *_u.c *_u.h *.pem
 
 $(ENCLAVE_NAME):EnclaveInitiator_t.o $(ENCLAVE_CPP_OBJECTS)
 	@$(CXX) $^ -o $@ $(ENCLAVE_LINK_FLAGS)
